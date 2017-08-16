@@ -2,14 +2,14 @@
 
 namespace Controller;
 
-use Model\BaseModel;
+use Model\UserModel;
 
 class IndexController extends Controller
 {
     public function test()
     {
-        $baseModel = new BaseModel();
-        return $baseModel->test();
+        $userModel = new UserModel();
+        return $userModel->getUser();
     }
 }
 

@@ -5,7 +5,6 @@ use Config;
 
 class Db
 {
-    //私有的属性
     private static $dbcon = false;
     private $host;
     private $port;
@@ -18,14 +17,14 @@ class Db
     //私有的构造方法
     private function __construct()
     {
-        $config = Config\getConfig('db');
+        $config = include ('../Config/Db.php');
 
-        $this->host = $config['host'] ? $config['host'] : 'localhost';
-        $this->port = $config['port'] ? $config['port'] : '3306';
-        $this->user = $config['user'] ? $config['user'] : 'root';
-        $this->pass = $config['pass'] ? $config['pass'] : 'root';
-        $this->db = $config['db'] ? $config['db'] : 'small2';
-        $this->charset = isset($arr['charset']) ? $arr['charset'] : 'utf8';
+        $this->host = $config['host'];
+        $this->port = $config['port'];
+        $this->user = $config['user'];
+        $this->pass = $config['pass'];
+        $this->db = $config['db'];
+        $this->charset = $config['charset'];
         //连接数据库
         $this->db_connect();
         //选择数据库
