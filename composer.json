@@ -7,7 +7,9 @@
 		"psr-4":
 		{
 			"Controller\\":"Controller/",
-			"Model\\":"Model/"
+			"Model\\":"Model/",
+			"Tool\\":"Tool/",
+			"Config\\":"Config/"
 		}
 	}
 }
