@@ -1,0 +1,54 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    font-family: "Microsoft YaHei";
+}
+body {
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+table {
+    margin-top: 30px;
+}
+
+input[type="text"] {
+    padding: 3px 5px;
+    font-size: 14px;
+    width: 110px;
+    font-weight: bold;
+}
+
+.button {
+    padding: 5px;
+    display: inline-block;
+    margin-right: 30px;
+}
+
+.container {
+    margin: 20px auto;
+    width: 1200px;
+    /*border: 1px solid #eee;*/
+}
+
+.container > h1 {
+    width: 100%;
+    text-align: center;
+}
+
+.container > table td, .container > table th {
+    padding: 10px;
+}
+
+.fr {
+    float: right;
+}
+
+.phone_number {
+    display: inline-block;
+    width: 100%;
+    height: 80px;
+    resize: none;
+    padding: 10px;
+}
