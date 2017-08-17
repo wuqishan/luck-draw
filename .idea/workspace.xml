@@ -2,20 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="514250ce-ee82-48e1-9f5d-11f283b4b86e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Config/Db.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Model/RewardModel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Model/UserRewardModel.php" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/css/index.css" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/Config/Config.php" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/Model/BaseModel.php" afterPath="$PROJECT_DIR$/Model/UserModel.php" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/public/css/main.css" afterPath="$PROJECT_DIR$/public/css/admin.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller/Controller.php" afterPath="$PROJECT_DIR$/Controller/Controller.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Controller/IndexController.php" afterPath="$PROJECT_DIR$/Controller/IndexController.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Model/Model.php" afterPath="$PROJECT_DIR$/Model/Model.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Tool/Db.php" afterPath="$PROJECT_DIR$/Tool/Db.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/admin.php" afterPath="$PROJECT_DIR$/public/admin.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/public/index.php" afterPath="$PROJECT_DIR$/public/index.php" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -384,12 +372,12 @@
       <option name="presentableId" value="Default" />
       <updated>1502805113297</updated>
       <workItem from="1502805114643" duration="696000" />
-      <workItem from="1502871070188" duration="5140000" />
+      <workItem from="1502871070188" duration="5257000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5836000" />
+    <option name="totallyTimeSpent" value="5953000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1358" y="-8" width="1936" height="1096" extended-state="6" />
