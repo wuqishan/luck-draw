@@ -9,7 +9,9 @@ class AdminController extends Controller
     public function addPhoneNumber($phone_number)
     {
         $userModel = new UserModel();
-        return $userModel->getUser($phone_number);
+        $this->result['data'] = $userModel->addUser($phone_number);
+
+        echo json_encode($this->result);
     }
 }
 

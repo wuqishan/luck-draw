@@ -7,13 +7,24 @@ class UserModel extends Model
     protected $tableName = 'user';
     protected $primaryKey = 'id';
 
-    public function getUser($phone_number)
+    public function __construct()
+    {
+        parent::__construct();
+    }
+
+    public function addUser($phone_number)
     {
         $phone_number = $this->checkPhoneNumber($phone_number);
 
+        if (count($phone_number['right']) > 0) {
+            foreach ($phone_number['right'] as $v) {
+                if (! $this->getRow(['phone_number' => $v])) {
+                    $this->insert(['phone_number' => $v]);
+                }
+            }
+        }
 
-
-        return [];
+        return $phone_number;
     }
 
 

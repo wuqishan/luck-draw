@@ -22,7 +22,6 @@ if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUE
 
     }
     // ajax 请求的处理方式
-    $admin->add();
     echo "<pre>";print_r($result);
     exit;
 }
@@ -49,15 +48,34 @@ if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUE
             <th colspan="8">初始化参与者</th>
         </tr>
         <tr>
-            <td>参与者电话号码(一次填写多个以英文逗号‘,’分隔)</td>
+            <td>所有参与用户</td>
         </tr>
         <tr>
-            <td><textarea class="phone_number"></textarea></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td><input type="button" class="init_phone_number button fr" value="清空所有的用户"></td>
+        </tr>
+        <tr>
+            <td>添加参与者电话号码(一次填写多个以英文逗号‘,’分隔)</td>
+        </tr>
+        <tr>
+            <td><input type="text" class="phone_number" style="width: 100%"></td>
         </tr>
         <tr>
             <td>
-                <input type="button" class="init_phone_number button fr" value="初始化参与者电话(清空操作)">
                 <input type="button" class="add_phone_number button fr" value="添加参与者电话">
+            </td>
+        </tr>
+        <tr>
+            <td>删除参与者电话号码(一次填写多个以英文逗号‘,’分隔)</td>
+        </tr>
+        <tr>
+            <td><input type="text" class="phone_number" style="width: 100%"></td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" class="del_phone_number button fr" value="删除参与者电话">
             </td>
         </tr>
     </table>

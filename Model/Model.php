@@ -6,7 +6,7 @@ use Tool\Db;
 
 class Model
 {
-    private $db;
+    protected $db;
     protected $tableName;
     protected $primaryKey = 'id';
 
@@ -14,13 +14,41 @@ class Model
     {
         $this->db = Db::getIntance();
     }
-    
 
-    public function fetchOneByPk($pk)
+    public function getRow($where)
     {
-        $sql = sprintf('select * from `%s` where ``%s`=%s', $this->tableName, $this->primaryKey);
+        $condition = [];
+        if (is_array($where)) {
+            foreach ($where as $k => $v) {
+                $condition[] = '`' . $k . '`' . '="' . $v .'"';
+            }
+        } else if (is_string($where)) {
+            $condition[] = $where;
+        } else {
+            return [];
+        }
+
+        $condition = implode(' and ', $condition);
+        $sql = sprintf('select * from `%s` where %s', $this->tableName, $condition);
 
         return $this->db->getRow($sql);
+    }
+
+    public function getAll($where = '')
+    {
+        $condition = [1];
+        if (is_array($where)) {
+            foreach ($where as $k => $v) {
+                $condition[] = '`' . $k . '`' . '="' . $v .'"';
+            }
+        } else if (is_string($where)) {
+            $condition[] = $where;
+        }
+
+        $condition = implode(' and ', $condition);
+        $sql = sprintf('select * from `%s` where %s', $this->tableName, $condition);
+
+        return $this->db->getAll($sql);
     }
 
     public function insert($data)

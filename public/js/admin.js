@@ -13,7 +13,7 @@ $(function(){
             $.ajax({
                 url: 'admin.php',
                 data: {phone_number: phone_number, type: 'add_phone_number'},
-                dataType: 'text',
+                dataType: 'json',
                 type: 'post',
                 beforeSend: function (request) {
 
