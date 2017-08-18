@@ -37,6 +37,12 @@ class AdminController extends Controller
         return $this->result;
     }
 
+    /**
+     * 初始化抽奖信息
+     *
+     * @param $data
+     * @return array
+     */
     public function initReward($data)
     {
         $rewardModel = new RewardModel();
@@ -45,11 +51,31 @@ class AdminController extends Controller
         return $this->result;
     }
 
-    public function getRewardInfo()
+    /**
+     * 更具grade获取哪些人已经抽取
+     *
+     * @param $data
+     * @return array
+     */
+    public function rewardDetail($data)
+    {
+        $rewardModel = new RewardModel();
+        $this->result['data'] = $rewardModel->rewardDetail($data['grade']);
+
+        return $this->result;
+    }
+
+    /**
+     * 获取抽奖信息
+     *
+     * @param $current
+     * @return array
+     */
+    public function getRewardInfo($current = false)
     {
         $rewardModel = new RewardModel();
 
-        return $rewardModel->getRewardInfo();
+        return $rewardModel->getRewardInfo($current);
     }
 
     /**

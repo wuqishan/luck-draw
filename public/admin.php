@@ -4,8 +4,8 @@ include '../vendor/autoload.php';
 
 use Controller\AdminController;
 
-$admin = new AdminController();
 
+$admin = new AdminController();
 
 if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUESTED_WITH"])=="xmlhttprequest"){
     $result = [];
@@ -21,8 +21,12 @@ if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUE
         case 'init_reward':
             echo json_encode($admin->initReward($_POST));
             break;
-        default:
 
+        case 'reward_detail':
+            echo json_encode($admin->rewardDetail($_POST));
+            break;
+
+        default:
     }
     exit;
 } else {
@@ -30,6 +34,8 @@ if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUE
     $allUser = $admin->getAllUser();
     // 获取抽奖初始化信息
     $rewardInfo = $admin->getRewardInfo();
+    // 获取各个奖项剩余数量
+    $currentRewardInfo = $admin->getRewardInfo(true);
 }
 
 //print_r( $rewardInfo);
@@ -42,13 +48,12 @@ if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUE
     <meta name="description" content="抽奖活动后台">
     <link rel="stylesheet" type="text/css" href="css/admin.css">
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
-
+    <script type="text/javascript" src="js/layer/layer.js"></script>
     <title>抽奖活动</title>
-
 </head>
 <body>
 <div class="container">
-    <h1>抽奖活动后台设置</h1>
+    <h1>抽奖活动后台设置<span class="time">2015-08-12 12:09:06</span></h1>
     <table border="1" cellpadding="0" cellspacing="0" width="100%">
         <tr>
             <th colspan="8">初始化参与者</th>
@@ -94,10 +99,17 @@ if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUE
             <td><input type="text" placeholder="待抽总数量" class="total_number" value="<?php if($rewardInfo['total_number']) { echo $rewardInfo['total_number']; } ?>"></td>
             <td>一等奖总数量</td>
             <td><input type="text" placeholder="一等奖数量" class="grade_number_1" value="<?php if($rewardInfo['grade_number_1']) { echo $rewardInfo['grade_number_1']; } ?>"></td>
+        </tr>
+        <tr>
             <td>二等奖总数量</td>
             <td><input type="text" placeholder="二等奖数量" class="grade_number_2" value="<?php if($rewardInfo['grade_number_2']) { echo $rewardInfo['grade_number_2']; } ?>"></td>
             <td>三等奖总数量</td>
             <td><input type="text" placeholder="三等奖数量" class="grade_number_3" value="<?php if($rewardInfo['grade_number_3']) { echo $rewardInfo['grade_number_3']; } ?>"></td>
+        </tr>
+        <tr>
+            <td>安慰奖总数量</td>
+            <td><input type="text" placeholder="安慰奖数量" class="grade_number_10000" value="<?php if($rewardInfo['grade_number_10000']) { echo $rewardInfo['grade_number_10000']; } ?>" disabled></td>
+            <td colspan="2"></td>
         </tr>
         <tr>
             <td colspan="8"><input type="button" class="init_reward button fr" onclick="init_reward();" value="初始化抽奖总数及奖品数量"></td>
@@ -106,21 +118,42 @@ if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUE
 
     <table border="1" cellpadding="0" cellspacing="0" width="100%">
         <tr>
-            <th colspan="8">抽奖报表</th>
+            <th colspan="4">抽奖报表(剩余数量)</th>
         </tr>
         <tr>
             <td>待抽总数量</td>
-            <td><input type="text" disabled></td>
-            <td>一等奖剩余数量</td>
-            <td><input type="text" disabled></td>
-            <td>二等奖剩余数量</td>
-            <td><input type="text" disabled></td>
-            <td>三等奖剩余数量</td>
-            <td><input type="text" disabled></td>
+            <td>
+                <input type="text" class="current_total_number" value="<?php if($currentRewardInfo['total_number']) { echo $currentRewardInfo['total_number']; } ?>" disabled>
+            </td>
+            <td>一等奖数量</td>
+            <td>
+                <input type="text" class="current_grade_number_1" value="<?php if($currentRewardInfo['grade_number_1']) { echo $currentRewardInfo['grade_number_1']; } ?>" disabled>
+                <input type="button" class="button-sm" onclick="reward_away_detail(1)" value="抽奖详情">
+            </td>
+        </tr>
+        <tr>
+            <td>二等奖数量</td>
+            <td>
+                <input type="text" class="current_grade_number_2" value="<?php if($currentRewardInfo['grade_number_2']) { echo $currentRewardInfo['grade_number_2']; } ?>" disabled>
+                <input type="button" class="button-sm" onclick="reward_away_detail(2)" value="抽奖详情">
+            </td>
+            <td>三等奖数量</td>
+            <td>
+                <input type="text" class="current_grade_number_3" value="<?php if($currentRewardInfo['grade_number_3']) { echo $currentRewardInfo['grade_number_3']; } ?>" disabled>
+                <input type="button" class="button-sm" onclick="reward_away_detail(3)" value="抽奖详情">
+            </td>
+        <tr>
+            <td>安慰奖数量</td>
+            <td>
+                <input type="text" class="current_grade_number_10000" value="<?php if($currentRewardInfo['grade_number_10000']) { echo $currentRewardInfo['grade_number_10000']; } ?>" disabled>
+                <input type="button" class="button-sm" onclick="reward_away_detail(10000)" value="抽奖详情">
+            </td>
+            <td colspan="2"></td>
+        </tr>
         </tr>
     </table>
-
 </div>
+<div class="box"><img src="images/loading.gif"></div>
 </body>
 <script type="text/javascript" src="js/admin.js"></script>
 </html>

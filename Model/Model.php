@@ -56,9 +56,12 @@ class Model
         return $this->db->insert($this->tableName, $data);
     }
 
-    public function initTable()
+    public function initTable($table = '')
     {
-        $sql = sprintf('truncate table `%s`', $this->tableName);
+        if ($table === '') {
+            $table = $this->tableName;
+        }
+        $sql = sprintf('truncate table `%s`', $table);
 
         return $this->db->query($sql);
     }

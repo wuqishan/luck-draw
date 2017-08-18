@@ -17,8 +17,10 @@ class RewardModel extends Model
             return array();
         }
 
-        // 初始化表格,准备重新录入
+        $data['grade_number_10000'] = $ifGtTotal;
+            // 初始化表格,准备重新录入
         $this->initTable();
+        $this->initTable('user_reward');
 
         $reward = ['grade' => 0, 'away' => 0];
         if ($data['grade_number_1'] > 0) {
@@ -47,19 +49,41 @@ class RewardModel extends Model
         return $data;
     }
 
-    public function getRewardInfo()
+    public function getRewardInfo($current)
     {
-        $result = ['grade_number_1' => 0, 'grade_number_2' => 0, 'grade_number_3' => 0];
+        $result = ['grade_number_1' => 0, 'grade_number_2' => 0, 'grade_number_3' => 0, 'total_number' => 0, 'grade_number_10000' => 0];
         $allReward = parent::getAll();
-        $result['total_number'] = count($allReward);
 
         foreach ($allReward as $v) {
-            $v['grade'] == 1 && $result['grade_number_1']++;
-            $v['grade'] == 2 && $result['grade_number_2']++;
-            $v['grade'] == 3 && $result['grade_number_3']++;
+
+            if ($current) {
+                $v['away'] == 0 && $result['total_number']++;
+                $v['grade'] == 1 && $v['away'] == 0 && $result['grade_number_1']++;
+                $v['grade'] == 2 && $v['away'] == 0 && $result['grade_number_2']++;
+                $v['grade'] == 3 && $v['away'] == 0 && $result['grade_number_3']++;
+                $v['grade'] == 10000 && $v['away'] == 0 && $result['grade_number_10000']++;
+            } else {
+                $result['total_number']++;
+                $v['grade'] == 1 && $result['grade_number_1']++;
+                $v['grade'] == 2 && $result['grade_number_2']++;
+                $v['grade'] == 3 && $result['grade_number_3']++;
+                $v['grade'] == 10000 && $result['grade_number_10000']++;
+            }
         }
 
         return $result;
+    }
+
+    public function rewardDetail($grade)
+    {
+        $grade = intval($grade);
+
+        $sqlPtn = 'select * from reward as r '.
+            'left join user_reward as ur on r.id = ur.reward_id '.
+            'left join user as u on ur.user_id = u.id where r.grade = %d and away = %d';
+        $sql = sprintf($sqlPtn, $grade, 1);
+
+        return $this->db->getAll($sql);
     }
 }
 
