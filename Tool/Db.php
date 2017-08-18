@@ -145,10 +145,6 @@ class Db
         $key_str = '';
         $v_str = '';
         foreach ($data as $key => $v) {
-            if (empty($v)) {
-                die("error");
-            }
-            //$key的值是每一个字段s一个字段所对应的值
             $key_str .= $key . ',';
             $v_str .= "'$v',";
         }
@@ -157,7 +153,7 @@ class Db
         //判断数据是否为空
         $sql = "insert into $table ($key_str) values ($v_str)";
         $this->query($sql);
-        //返回上一次增加操做产生ID值
+
         return $this->getInsertid();
     }
 

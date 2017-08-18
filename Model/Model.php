@@ -44,7 +44,7 @@ class Model
         } else if (is_string($where)) {
             $condition[] = $where;
         }
-
+        $condition = array_filter($condition);
         $condition = implode(' and ', $condition);
         $sql = sprintf('select * from `%s` where %s', $this->tableName, $condition);
 
@@ -56,6 +56,17 @@ class Model
         return $this->db->insert($this->tableName, $data);
     }
 
+    public function initTable()
+    {
+        $sql = sprintf('truncate table `%s`', $this->tableName);
+
+        return $this->db->query($sql);
+    }
+
+    public function delete($where)
+    {
+        return $this->db->deleteAll($this->tableName, $where);
+    }
 }
 
 
