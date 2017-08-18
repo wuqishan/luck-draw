@@ -45,6 +45,13 @@ class AdminController extends Controller
         return $this->result;
     }
 
+    public function getRewardInfo()
+    {
+        $rewardModel = new RewardModel();
+
+        return $rewardModel->getRewardInfo();
+    }
+
     /**
      * 获取所有用户信息
      *

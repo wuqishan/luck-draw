@@ -28,9 +28,11 @@ if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUE
 } else {
     // 获取所有用户
     $allUser = $admin->getAllUser();
+    // 获取抽奖初始化信息
+    $rewardInfo = $admin->getRewardInfo();
 }
 
-//print_r( $index->test());
+//print_r( $rewardInfo);
 
 ?>
 
@@ -89,13 +91,13 @@ if(isset($_SERVER["HTTP_X_REQUESTED_WITH"]) && strtolower($_SERVER["HTTP_X_REQUE
         </tr>
         <tr>
             <td>待抽总数量</td>
-            <td><input type="text" placeholder="待抽总数量" class="total_number"></td>
+            <td><input type="text" placeholder="待抽总数量" class="total_number" value="<?php if($rewardInfo['total_number']) { echo $rewardInfo['total_number']; } ?>"></td>
             <td>一等奖总数量</td>
-            <td><input type="text" placeholder="一等奖数量" class="grade_number_1"></td>
+            <td><input type="text" placeholder="一等奖数量" class="grade_number_1" value="<?php if($rewardInfo['grade_number_1']) { echo $rewardInfo['grade_number_1']; } ?>"></td>
             <td>二等奖总数量</td>
-            <td><input type="text" placeholder="二等奖数量" class="grade_number_2"></td>
+            <td><input type="text" placeholder="二等奖数量" class="grade_number_2" value="<?php if($rewardInfo['grade_number_2']) { echo $rewardInfo['grade_number_2']; } ?>"></td>
             <td>三等奖总数量</td>
-            <td><input type="text" placeholder="三等奖数量" class="grade_number_3"></td>
+            <td><input type="text" placeholder="三等奖数量" class="grade_number_3" value="<?php if($rewardInfo['grade_number_3']) { echo $rewardInfo['grade_number_3']; } ?>"></td>
         </tr>
         <tr>
             <td colspan="8"><input type="button" class="init_reward button fr" onclick="init_reward();" value="初始化抽奖总数及奖品数量"></td>

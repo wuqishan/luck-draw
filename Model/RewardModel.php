@@ -46,6 +46,21 @@ class RewardModel extends Model
 
         return $data;
     }
+
+    public function getRewardInfo()
+    {
+        $result = ['grade_number_1' => 0, 'grade_number_2' => 0, 'grade_number_3' => 0];
+        $allReward = parent::getAll();
+        $result['total_number'] = count($allReward);
+
+        foreach ($allReward as $v) {
+            $v['grade'] == 1 && $result['grade_number_1']++;
+            $v['grade'] == 2 && $result['grade_number_2']++;
+            $v['grade'] == 3 && $result['grade_number_3']++;
+        }
+
+        return $result;
+    }
 }
 
 
